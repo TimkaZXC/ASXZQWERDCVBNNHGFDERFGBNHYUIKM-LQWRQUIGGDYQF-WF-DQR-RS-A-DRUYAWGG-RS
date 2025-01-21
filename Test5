@@ -76,6 +76,8 @@ end
 
 else
 
+for i = 1, 2 do
+
 for _, player in pairs(game.Players:GetPlayers()) do
 if player.Name ~= game.Players.LocalPlayer.Name then
 for _, part in pairs(player.Character:GetChildren()) do
@@ -88,6 +90,8 @@ end
 end
 end
 end
+end
+
 end
 
 end
