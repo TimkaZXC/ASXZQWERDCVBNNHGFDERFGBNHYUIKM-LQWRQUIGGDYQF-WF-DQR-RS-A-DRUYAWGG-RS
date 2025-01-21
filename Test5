@@ -102,3 +102,33 @@ end
 end
 
 end)
+
+for _, plr in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+if plr.Name == "X1Plr" then
+local args = {
+    [1] = "Arma",
+    [2] = game:GetService("Players").LocalPlayer.Character.Pistola,
+    [3] = plr.Value.Character.Head,
+    [4] = plr.Value.Character.Head.Position,
+    [5] = Vector3.new(-0.0017826893599703908, -0.024152107536792755, 0.9997068047523499)
+}
+
+game:GetService("ReplicatedStorage").Events.DanoGeral:InvokeServer(unpack(args))
+end
+end
+
+for _, plrs in pairs(game.Players:GetChildren()) do
+if plrs.Name ~= game.Players.LocalPlayer.Name then
+if plrs.Status.Duelo.Value == true then
+local args = {
+    [1] = "Arma",
+    [2] = game:GetService("Players").LocalPlayer.Character.Pistola,
+    [3] = plrs.Character.Head,
+    [4] = plrs.Character.Head.Position,
+    [5] = Vector3.new(-0.0017826893599703908, -0.024152107536792755, 0.9997068047523499)
+}
+
+game:GetService("ReplicatedStorage").Events.DanoGeral:InvokeServer(unpack(args))
+end
+end
+end
