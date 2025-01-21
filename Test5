@@ -1,7 +1,12 @@
 local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/TimkaZXC/ASXZQWERDCVBNNHGFDERFGBNHYUIKM-LQWRQUIGGDYQF-WF-DQR-RS-A-DRUYAWGG-RS/refs/heads/main/Library_V2"))()
 local Hub = Lib.Hub("[🎄]Vexor PVP")
-local Esp = Hub:Section("[🎄]", Color3.fromRGB(255,255,0))
-Esp:Toggle("[🎄]", Color3.fromRGB(255,255,0), function(s)
+local Kill = Hub:Section("[🎄]Kill", Color3.fromRGB(255,0,0))
+Kill:Title("[🎄]Kill's", Color3.fromRGB(255,0,0))
+
+
+local Esp = Hub:Section("[🎄]Esp", Color3.fromRGB(255,255,0))
+Esp:Title("[🎄]Esp's", Color3.fromRGB(255,255,0))
+Esp:Toggle("[🎄]All Body", Color3.fromRGB(255,255,0), function(s)
 
 local function EspBox(parent, name, color:Color3, thickness:number)
 	if parent:IsA("Part") or parent:IsA("MeshPart") then
