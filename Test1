@@ -1,0 +1,75 @@
+local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/TimkaZXC/ASXZQWERDCVBNNHGFDERFGBNHYUIKM-LQWRQUIGGDYQF-WF-DQR-RS-A-DRUYAWGG-RS/refs/heads/main/Library_V1"))()
+local Hub = Lib.Hub("[🎄]Vexor PVP")
+local Esp = Hub:Section("[🎄]", Color3.fromRGB(255,255,0))
+Esp:Toggle("[🎄]", Color3.fromRGB(255,255,0), function(s)
+  if not s then return end
+  if s then
+  local function EspBox(parent, name, color:Color3, thickness:number)
+		if parent:IsA("Part") or parent:IsA("MeshPart") then
+			local BillboardGui = Instance.new("BillboardGui")
+			local Frame = Instance.new("Frame")
+			local UIStroke = Instance.new("UIStroke")
+
+			if parent.Name == "Head" then
+				local player = game:GetService("Players").LocalPlayer
+				local char = player.Character or player.CharacterAdded:Wait()
+				local humR = char:FindFirstChild("HumanoidRootPart")
+				
+				local BillboardGui1 = Instance.new("BillboardGui")
+				local TypeG = Instance.new("TextLabel")
+				
+				BillboardGui1.AlwaysOnTop = true
+				BillboardGui1.Enabled = true
+				BillboardGui1.ExtentsOffset = Vector3.new(0,2,0)
+				BillboardGui1.Name = "Player_Name: "..parent.Name
+				
+				TypeG.Size = UDim2.fromScale(1, 0.65)
+				TypeG.Position = UDim2.fromScale(0.0, 0.0)
+				TypeG.BackgroundTransparency = 1
+				TypeG.Text = name
+				TypeG.TextScaled = true
+				TypeG.Font = Enum.Font.PatrickHand
+				TypeG.TextColor3 = color
+				TypeG.Parent = BillboardGui1
+				
+				BillboardGui.Size = UDim2.fromScale(parent.Size.Y, parent.Size.Z)
+				BillboardGui1.Size = UDim2.fromScale(1.5, 1)
+				BillboardGui1.Parent = parent
+			else
+				BillboardGui.Size = UDim2.fromScale(parent.Size.X, parent.Size.Y)
+			end
+			BillboardGui.AlwaysOnTop = true
+			BillboardGui.Enabled = true
+
+			Frame.Size = UDim2.fromScale(0.98, 0.98)
+			Frame.Position = UDim2.fromScale(0.01, 0.01)
+			Frame.BackgroundTransparency = 1
+
+			UIStroke.Color = color
+			UIStroke.Thickness = thickness
+
+			BillboardGui.Parent = parent
+			Frame.Parent = BillboardGui
+			UIStroke.Parent = Frame
+			BillboardGui.Name = "Player_ "..parent.Name
+            end
+	end
+
+for _, player in pairs(game.Players:GetPlayers()) do
+if player.Name ~= game.Players.LocalPlayer.Name then
+for _, part in pairs(player.Character:GetChildren()) do
+if part:IsA("Part") or part:IsA("MeshPart") then 
+if not part:FindFirstChildOfClass("BillboardGui") then
+if player.Team == game.Players.LocalPlayer.Team then
+EspBox(part, player.Name, Color3.fromRGB(0,255,0), 1)
+else
+EspBox(part, player.Name, Color3.fromRGB(255,0,0), 1)
+end
+end
+end
+end
+end
+end
+end
+
+end)
