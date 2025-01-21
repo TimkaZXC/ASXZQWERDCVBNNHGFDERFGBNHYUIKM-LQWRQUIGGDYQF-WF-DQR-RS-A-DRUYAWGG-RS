@@ -8,7 +8,7 @@ function menu.Hub(name)
 	local TweenService = game:GetService("TweenService")
 	local UserInputService = game:GetService("UserInputService")
 	local RunService = game:GetService("RunService")
-	
+
 	local function OnDragged(frame, speed)
 		local gui = frame
 
@@ -61,14 +61,14 @@ function menu.Hub(name)
 
 		RunService.Heartbeat:Connect(Update)
 	end
-	
+
 	local function Corner(parent, udim:UDim)
 		local corner = Instance.new("UICorner")
 		corner.CornerRadius = udim
 		corner.Parent = parent
 		return corner
 	end
-	
+
 	local function Stroke(parent, color, thickness)
 		local stroke = Instance.new("UIStroke")
 		stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
@@ -78,7 +78,7 @@ function menu.Hub(name)
 		stroke.Parent = parent
 		return stroke
 	end
-	
+
 	local function Lists(parent, udim:UDim)
 		local list = Instance.new("UIListLayout")
 		list.Padding = udim
@@ -89,7 +89,7 @@ function menu.Hub(name)
 		list.Parent = parent
 		return list
 	end
-	
+
 	local function Padd(parent, b:UDim, l:UDim, r:UDim, t:UDim)
 		local padd = Instance.new("UIPadding")
 		padd.PaddingBottom = b
@@ -99,7 +99,7 @@ function menu.Hub(name)
 		padd.Parent = parent
 		return padd
 	end
-	
+
 	local function Inco(parent, color:Color3)
 		if not color then
 			color = Color3.new(1,1,1)
@@ -112,7 +112,7 @@ function menu.Hub(name)
 		inco.Parent = parent
 		return inco
 	end
-	
+
 	local function Scroll(scroll:ScrollingFrame)
 		scroll.BackgroundColor3 = Color3.new(0,0,0)
 		scroll.BackgroundTransparency = 1
@@ -123,7 +123,7 @@ function menu.Hub(name)
 		scroll.ScrollBarThickness = 0
 		return scroll
 	end
-	
+
 	if not Player_Gui:FindFirstChild(name) then
 		local ScreenGui = Instance.new("ScreenGui", Player_Gui)
 		ScreenGui.Name = name
@@ -137,8 +137,8 @@ function menu.Hub(name)
 		local Open = Instance.new("TextButton", ScreenGui)
 		Open.Text = ScreenGui.Name:sub(1, 1)
 		Open.BackgroundColor3 = Color3.fromRGB(0,0,0)
-		Open.Position = UDim2.fromScale(0.475, 0.0161)
-		Open.Size = UDim2.fromScale(0.05, 0.069)
+		Open.Position = UDim2.fromScale(0.472, 0.038)
+		Open.Size = UDim2.fromOffset(40, 40)
 		Open.Font = Enum.Font.PatrickHand
 		Open.FontFace.Bold = true
 		Open.RichText = true
@@ -156,12 +156,13 @@ function menu.Hub(name)
 		MouseShow.Modal = true
 		MouseShow.ZIndex = 999999998
 		MouseShow.Visible = true
+		MouseShow.Text = ""
 
 		local Panel_Background = Instance.new("ImageLabel", ScreenGui)
 		Panel_Background.BackgroundTransparency = 1
 		Panel_Background.ImageTransparency = 0.35
-		Panel_Background.Position = UDim2.fromScale(0.204, 0.255)
-		Panel_Background.Size = UDim2.fromScale(0.592, 0.489)
+		Panel_Background.Position = UDim2.fromScale(0.177, 0.164)
+		Panel_Background.Size = UDim2.fromOffset(473, 293)
 		Panel_Background.ZIndex = 999999999
 		Panel_Background.Image = "rbxassetid://90433430103893"
 		Panel_Background.Visible = true
@@ -170,12 +171,12 @@ function menu.Hub(name)
 		local Panel = Instance.new("Frame", Panel_Background)
 		Panel.BackgroundColor3 = Color3.fromRGB(0,0,0)
 		Panel.BackgroundTransparency = 0.65
-		Panel.Size = UDim2.fromScale(1,0.088)
+		Panel.Size = UDim2.new(1, 0, 0, 25)
 		--[Panel_Children]
 		local Close = Instance.new("ImageButton", Panel)
 		Close.BackgroundTransparency = 1
-		Close.Position = UDim2.fromScale(0.953, 0.08)
-		Close.Size = UDim2.fromScale(0.042, 0.8)
+		Close.Position = UDim2.fromOffset(451, 2)
+		Close.Size = UDim2.fromOffset(20,20)
 		Close.Image = "rbxassetid://78232121914652"
 
 		local Setting = Instance.new("ImageButton", Panel)
@@ -187,8 +188,8 @@ function menu.Hub(name)
 		local Title = Instance.new("TextLabel", Panel)
 		Title.BackgroundColor3 = Color3.fromRGB(255,255,255)
 		Title.BackgroundTransparency = 1
-		Title.Position = UDim2.fromScale(0.005, 0)
-		Title.Size = UDim2.fromScale(0.495, 1)
+		Title.Position = UDim2.fromOffset(5,0)
+		Title.Size = UDim2.fromOffset(367,25)
 		Title.Font = Enum.Font.PatrickHand
 		Title.FontFace.Bold = true
 		Title.RichText = true
@@ -200,8 +201,8 @@ function menu.Hub(name)
 		local Panel_Sections = Instance.new("Frame", Panel_Background)
 		Panel_Sections.BackgroundColor3 = Color3.fromRGB(0,0,0)
 		Panel_Sections.BackgroundTransparency = 0.65
-		Panel_Sections.Position = UDim2.fromScale(0.0, 0.105)
-		Panel_Sections.Size = UDim2.fromScale(0.263, 0.895)
+		Panel_Sections.Position = UDim2.fromOffset(0,30)
+		Panel_Sections.Size = UDim2.fromOffset(124,262)
 		--[Sections_Children]
 		local Scroll_Sections = Instance.new("ScrollingFrame", Panel_Sections)
 		Scroll(Scroll_Sections)
@@ -211,14 +212,14 @@ function menu.Hub(name)
 		local Panel_Functions = Instance.new("Frame", Panel_Background)
 		Panel_Functions.BackgroundColor3 = Color3.fromRGB(0,0,0)
 		Panel_Functions.BackgroundTransparency = 0.65
-		Panel_Functions.Position = UDim2.fromScale(0.274, 0.105)
-		Panel_Functions.Size = UDim2.fromScale(0.726, 0.895)
+		Panel_Functions.Position = UDim2.fromOffset(129,30)
+		Panel_Functions.Size = UDim2.fromOffset(343,262)
 
 		local Panel_Setting = Instance.new("Frame", Panel_Background)
 		Panel_Setting.BackgroundColor3 = Color3.fromRGB(0,0,0)
 		Panel_Setting.BackgroundTransparency = 0.65
-		Panel_Setting.Position = UDim2.fromScale(0.0, 0.105)
-		Panel_Setting.Size = UDim2.fromScale(1, 0.895)
+		Panel_Setting.Position = UDim2.fromOffset(0,30)
+		Panel_Setting.Size = UDim2.fromOffset(473,262)
 		Panel_Setting.Visible = false
 		--[Setting_Children]
 		local c_f = Instance.new("Frame", Panel_Setting)
@@ -227,8 +228,8 @@ function menu.Hub(name)
 		Scroll(Sc_f)
 		c_f.BackgroundColor3 = Color3.fromRGB(34,34,34)
 		c_f.BackgroundTransparency = 0.5
-		c_f.Position = UDim2.fromScale(0.337, 0.121)
-		c_f.Size = UDim2.fromScale(0.326, 0.878)
+		c_f.Position = UDim2.fromOffset(159,31)
+		c_f.Size = UDim2.fromOffset(154,230)
 
 		local l_f = Instance.new("Frame", Panel_Setting)
 		local Sl_f = Instance.new("ScrollingFrame", l_f)
@@ -236,8 +237,8 @@ function menu.Hub(name)
 		Scroll(Sl_f)
 		l_f.BackgroundColor3 = Color3.fromRGB(34,34,34)
 		l_f.BackgroundTransparency = 0.5
-		l_f.Position = UDim2.fromScale(0, 0.121)
-		l_f.Size = UDim2.fromScale(0.326, 0.878)
+		l_f.Position = UDim2.fromOffset(0,31)
+		l_f.Size = UDim2.fromOffset(154,230)
 
 		local r_f = Instance.new("Frame", Panel_Setting)
 		local Sr_f = Instance.new("ScrollingFrame", r_f)
@@ -245,14 +246,14 @@ function menu.Hub(name)
 		Scroll(Sr_f)
 		r_f.BackgroundColor3 = Color3.fromRGB(34,34,34)
 		r_f.BackgroundTransparency = 0.5
-		r_f.Position = UDim2.fromScale(0.674, 0.121)
-		r_f.Size = UDim2.fromScale(0.326, 0.878)
+		r_f.Position = UDim2.fromOffset(319,31)
+		r_f.Size = UDim2.fromOffset(154,230)
 
 		local c_t = Instance.new("TextLabel", Panel_Setting)
 		c_t.BackgroundColor3 = Color3.fromRGB(34,34,34)
 		c_t.BackgroundTransparency = 0.5
-		c_t.Position = UDim2.fromScale(0.337, 0)
-		c_t.Size = UDim2.fromScale(0.326, 0.098)
+		c_t.Position = UDim2.fromOffset(159,0)
+		c_t.Size = UDim2.fromOffset(154,25)
 		c_t.Font = Enum.Font.PatrickHand
 		c_t.FontFace.Bold = true
 		c_t.RichText = true
@@ -263,8 +264,8 @@ function menu.Hub(name)
 		local l_t = Instance.new("TextLabel", Panel_Setting)
 		l_t.BackgroundColor3 = Color3.fromRGB(34,34,34)
 		l_t.BackgroundTransparency = 0.5
-		l_t.Position = UDim2.fromScale(0, 0)
-		l_t.Size = UDim2.fromScale(0.326, 0.098)
+		l_t.Position = UDim2.fromOffset(0,0)
+		l_t.Size = UDim2.fromOffset(154,25)
 		l_t.Font = Enum.Font.PatrickHand
 		l_t.FontFace.Bold = true
 		l_t.RichText = true
@@ -275,15 +276,15 @@ function menu.Hub(name)
 		local r_t = Instance.new("TextLabel", Panel_Setting)
 		r_t.BackgroundColor3 = Color3.fromRGB(34,34,34)
 		r_t.BackgroundTransparency = 0.5
-		r_t.Position = UDim2.fromScale(0.674, 0)
-		r_t.Size = UDim2.fromScale(0.326, 0.098)
+		r_t.Position = UDim2.fromOffset(319,0)
+		r_t.Size = UDim2.fromOffset(154,25)
 		r_t.Font = Enum.Font.PatrickHand
 		r_t.FontFace.Bold = true
 		r_t.RichText = true
 		r_t.Text = "Hub_Setting"
 		r_t.TextColor3 = Color3.fromRGB(255,255,255)
 		r_t.TextScaled = true
-		
+
 		Open.MouseButton1Click:Connect(function()
 			if Panel_Background.Visible == false then
 				Panel_Background.Visible = true
@@ -309,7 +310,7 @@ function menu.Hub(name)
 				Panel_Sections.Visible = true
 			end
 		end)
-		
+
 		UserInputService.InputBegan:Connect(function(input, process)
 			if process then return end
 			if input.KeyCode == Enum.KeyCode.Z then
@@ -324,71 +325,71 @@ function menu.Hub(name)
 				end
 			end
 		end)
-		
-		
+
+
 		local sec = {}
 		function sec:Section(name, color)
-			
-				local Active = Instance.new("TextButton", Scroll_Sections)
-				local Title = Instance.new("TextLabel", Active)
-				local Scroll_Function = Instance.new("ScrollingFrame", Panel_Functions)
-				Scroll_Function.Visible = false
-				Scroll_Function.Name = name
-				
-				Lists(Scroll_Function, UDim.new(0.02, 0))
-				Scroll(Scroll_Function)
-				Inco(Active, color)
-				
-				Active.Name = name
-				Active.BackgroundColor3 = Color3.fromRGB(85,85,85)
-				Active.Size = UDim2.fromScale(1, 0.119)
-				Active.BackgroundTransparency = 0.65
-				Active.Text = ""
-				
-				Title.Size = UDim2.fromScale(0.976,1)
-				Title.Position = UDim2.fromScale(0.035, 0)
+
+			local Active = Instance.new("TextButton", Scroll_Sections)
+			local Title = Instance.new("TextLabel", Active)
+			local Scroll_Function = Instance.new("ScrollingFrame", Panel_Functions)
+			Scroll_Function.Visible = false
+			Scroll_Function.Name = name
+
+			Lists(Scroll_Function, UDim.new(0.02, 0))
+			Scroll(Scroll_Function)
+			Inco(Active, color)
+
+			Active.Name = name
+			Active.BackgroundColor3 = Color3.fromRGB(85,85,85)
+			Active.Size = UDim2.fromScale(1, 0.119)
+			Active.BackgroundTransparency = 0.65
+			Active.Text = ""
+
+			Title.Size = UDim2.fromScale(0.976,1)
+			Title.Position = UDim2.fromScale(0.035, 0)
+			Title.TextScaled = true
+			Title.RichText = true
+			Title.Text = name
+			Title.TextColor3 = Color3.fromRGB(255,255,255)
+			Title.Font = Enum.Font.PatrickHand
+			Title.BackgroundTransparency = 1
+			Title.TextXAlignment = Enum.TextXAlignment.Left
+
+			Active.MouseButton1Click:Connect(function()
+				if Scroll_Function.Visible == false then
+					Scroll_Function.Visible = true
+					for _, other in pairs(Panel_Functions:GetChildren()) do
+						if other:IsA("ScrollingFrame") and other ~= Scroll_Function then
+							other.Visible = false
+						end
+					end
+				else
+
+					Scroll_Function.Visible = false
+				end
+			end)
+
+			local actions = {}
+			function actions:Title(text)
+				local TitleBack = Instance.new("Frame",	Scroll_Function)
+				local Title = Instance.new("TextLabel", TitleBack)
+
+				TitleBack.BackgroundColor3 = Color3.fromRGB(85,85,85)
+				TitleBack.BackgroundTransparency = 0.65
+				TitleBack.Size = UDim2.fromScale(1, 0.123)
+
+				Title.Size = UDim2.fromScale(0.9,1)
+				Title.Position = UDim2.fromScale(0.048)
 				Title.TextScaled = true
 				Title.RichText = true
-				Title.Text = name
+				Title.Text = text
 				Title.TextColor3 = Color3.fromRGB(255,255,255)
 				Title.Font = Enum.Font.PatrickHand
 				Title.BackgroundTransparency = 1
-				Title.TextXAlignment = Enum.TextXAlignment.Left
-				
-				Active.MouseButton1Click:Connect(function()
-					if Scroll_Function.Visible == false then
-						Scroll_Function.Visible = true
-						for _, other in pairs(Panel_Functions:GetChildren()) do
-							if other:IsA("ScrollingFrame") and other ~= Scroll_Function then
-								other.Visible = false
-							end
-						end
-					else
-						
-						Scroll_Function.Visible = false
-					end
-				end)
-				
-			local actions = {}
-			function actions:Title(text)
-					local TitleBack = Instance.new("Frame",	Scroll_Function)
-					local Title = Instance.new("TextLabel", TitleBack)
-					
-					TitleBack.BackgroundColor3 = Color3.fromRGB(85,85,85)
-					TitleBack.BackgroundTransparency = 0.65
-					TitleBack.Size = UDim2.fromScale(1, 0.123)
-					
-					Title.Size = UDim2.fromScale(0.9,1)
-					Title.Position = UDim2.fromScale(0.048)
-					Title.TextScaled = true
-					Title.RichText = true
-					Title.Text = text
-					Title.TextColor3 = Color3.fromRGB(255,255,255)
-					Title.Font = Enum.Font.PatrickHand
-					Title.BackgroundTransparency = 1
-					Title.TextXAlignment = Enum.TextXAlignment.Center
+				Title.TextXAlignment = Enum.TextXAlignment.Center
 			end
-			
+
 			function actions:Active(text, color, action:FunctionalTest)
 				local Active = Instance.new("TextButton", Scroll_Function)
 				local Title = Instance.new("TextLabel", Active)
@@ -424,12 +425,12 @@ function menu.Hub(name)
 					TweenService:Create(Icon, TweenInfo.new(0.1), {ImageColor3 = startC}):Play()
 				end)
 			end
-			
+
 			function actions:Toggle(text, color, action)
 				local Active = Instance.new("TextButton", Scroll_Function)
 				local Title = Instance.new("TextLabel", Active)
 				local Icon = Instance.new("ImageLabel", Active)
-				
+
 				local action = action or function()	end
 
 				Active.BackgroundColor3 = Color3.fromRGB(85,85,85)
@@ -471,7 +472,7 @@ function menu.Hub(name)
 					end
 				end)
 			end
-			
+
 			function actions:Change(text, typeB, color, place, clear, action)
 				local Active = Instance.new("TextButton", Scroll_Function)
 				local Scroll_Back = Instance.new("Frame", Active)
@@ -497,7 +498,7 @@ function menu.Hub(name)
 				Title.Text = text
 				Title.TextColor3 = color
 				Title.TextXAlignment = Enum.TextXAlignment.Left
-				
+
 				Scroll_Back.BackgroundColor3 = Color3.fromRGB(0,0,0)
 				Scroll_Back.BackgroundTransparency = 0.65
 				Scroll_Back.Position = UDim2.fromScale(0.612, 0.074)
@@ -508,7 +509,7 @@ function menu.Hub(name)
 				Scroll_List.Size = UDim2.fromScale(1, 1)
 				Scroll_List.ScrollBarImageColor3 = Color3.new(1,1,1)
 				Scroll_List.ScrollBarThickness = 2
-				
+
 				Box.BackgroundColor3 = Color3.fromRGB(0,0,0)
 				Box.BackgroundTransparency = 0.65
 				Box.Position = UDim2.fromScale(0.612, 0.074)
@@ -520,19 +521,19 @@ function menu.Hub(name)
 				Box.PlaceholderColor3 = Color3.fromRGB(200,200,200)
 				Box.TextScaled = true
 				Box.Text = ""
-				
+
 				Icon.BackgroundTransparency = 1
 				Icon.Position = UDim2.fromScale(0.897, 0.148)
 				Icon.Size = UDim2.fromScale(0.083, 0.687)
 				Icon.Image = "rbxassetid://133565727608600"
 				Icon.ImageColor3 = color
-				
+
 				if clear == false then
 					Box.ClearTextOnFocus = false
 				elseif clear == true then
 					Box.ClearTextOnFocus = false
 				end
-				
+
 				local startC = Icon.ImageColor3
 				if typeB == 1 then
 					Active.MouseButton1Click:Connect(function()
@@ -561,10 +562,10 @@ function menu.Hub(name)
 					end)
 				end
 			end
-			
+
 			function actions:List(text, typeB, typeC, image, color, folder, action)
 				local Object = Instance.new("ObjectValue")
-				
+
 				local Active = Instance.new("TextButton", Scroll_Function)
 				--local Refresh = Instance.new("ImageButton", Active)
 				local Title = Instance.new("TextLabel", Active)
@@ -579,7 +580,7 @@ function menu.Hub(name)
 				Active.BackgroundTransparency = 0.65
 				Active.Text = ""
 				Inco(Active, color)
-				
+
 				--Refresh.BackgroundColor3 = Color3.fromRGB(85,85,85)
 				--Refresh.Size = UDim2.fromScale(1, 0.163)
 				--Refresh.BackgroundTransparency = 0.65
@@ -594,12 +595,12 @@ function menu.Hub(name)
 				Title.Text = text
 				Title.TextColor3 = color
 				Title.TextXAlignment = Enum.TextXAlignment.Left
-				
+
 				Scroll_Back.BackgroundColor3 = Color3.fromRGB(0,0,0)
 				Scroll_Back.BackgroundTransparency = 0.65
 				Scroll_Back.Position = UDim2.fromScale(0.612, 0.074)
 				Scroll_Back.Size = UDim2.fromScale(0.273, 0.835)
-				
+
 				Scroll(Scroll_List)
 				Lists(Scroll_List, UDim.new(0.2))
 				Scroll_List.Position = UDim2.fromScale(0, 0)
@@ -667,83 +668,83 @@ function menu.Hub(name)
 								Description.TextXAlignment = Enum.TextXAlignment.Center
 							elseif typeC == 3 then
 								if not image then return end
-									local Icon = Instance.new("ImageLabel", Button)
-									local Title1 = Instance.new("TextLabel", Button)
-									Button.BackgroundColor3 = Color3.fromRGB(85,85,85)
-									Button.Size = UDim2.fromScale(1, 1)
-									Button.BackgroundTransparency = 0.65
-									Button.Text = ""
+								local Icon = Instance.new("ImageLabel", Button)
+								local Title1 = Instance.new("TextLabel", Button)
+								Button.BackgroundColor3 = Color3.fromRGB(85,85,85)
+								Button.Size = UDim2.fromScale(1, 1)
+								Button.BackgroundTransparency = 0.65
+								Button.Text = ""
 
-									Title1.Size = UDim2.fromScale(1,1)
-									Title1.Position = UDim2.fromScale(0, 0)
-									Title1.BackgroundTransparency = 1
-									Title1.Font = Enum.Font.PatrickHand
-									Title1.RichText = true
-									Title1.TextScaled = true
-									Title1.Text = v.Name
-									Title1.TextColor3 = Color3.fromRGB(255,255,255)
-									Title1.TextXAlignment = Enum.TextXAlignment.Left
+								Title1.Size = UDim2.fromScale(1,1)
+								Title1.Position = UDim2.fromScale(0, 0)
+								Title1.BackgroundTransparency = 1
+								Title1.Font = Enum.Font.PatrickHand
+								Title1.RichText = true
+								Title1.TextScaled = true
+								Title1.Text = v.Name
+								Title1.TextColor3 = Color3.fromRGB(255,255,255)
+								Title1.TextXAlignment = Enum.TextXAlignment.Left
 
-									Icon.Size = UDim2.fromScale(1, 1)
-									Icon.Position = UDim2.fromScale(0, 0)
-									Icon.BackgroundTransparency = 0
-									Icon.Image = image
+								Icon.Size = UDim2.fromScale(1, 1)
+								Icon.Position = UDim2.fromScale(0, 0)
+								Icon.BackgroundTransparency = 0
+								Icon.Image = image
 							elseif typeC == 4 then
 								if not image then return end
-									local Icon = Instance.new("ImageLabel", Button)
-									local Title1 = Instance.new("TextLabel", Button)
-									local Description = Instance.new("TextLabel", Button)
-									
-									Button.BackgroundColor3 = Color3.fromRGB(85,85,85)
-									Button.Size = UDim2.fromScale(1, 1)
-									Button.BackgroundTransparency = 0.65
-									Button.Text = ""
+								local Icon = Instance.new("ImageLabel", Button)
+								local Title1 = Instance.new("TextLabel", Button)
+								local Description = Instance.new("TextLabel", Button)
 
-									Title1.Size = UDim2.fromScale(1,1)
-									Title1.Position = UDim2.fromScale(0, 0)
-									Title1.BackgroundTransparency = 1
-									Title1.Font = Enum.Font.PatrickHand
-									Title1.RichText = true
-									Title1.TextScaled = true
-									Title1.Text = v.Name
-									Title1.TextColor3 = Color3.fromRGB(255,255,255)
-									Title1.TextXAlignment = Enum.TextXAlignment.Left
-									
-									Description.Size = UDim2.fromScale(1,0.441)
-									Description.Position = UDim2.fromScale(0, 0)
-									Description.BackgroundTransparency = 1
-									Description.Font = Enum.Font.PatrickHand
-									Description.RichText = true
-									Description.TextScaled = true
-									Description.Text = v.Name
-									Description.TextColor3 = Color3.fromRGB(200,200,200)
-									Description.TextXAlignment = Enum.TextXAlignment.Left
+								Button.BackgroundColor3 = Color3.fromRGB(85,85,85)
+								Button.Size = UDim2.fromScale(1, 1)
+								Button.BackgroundTransparency = 0.65
+								Button.Text = ""
 
-									Icon.Size = UDim2.fromScale(1, 1)
-									Icon.Position = UDim2.fromScale(0, 0)
-									Icon.BackgroundTransparency = 0
-									Icon.Image = image
+								Title1.Size = UDim2.fromScale(1,1)
+								Title1.Position = UDim2.fromScale(0, 0)
+								Title1.BackgroundTransparency = 1
+								Title1.Font = Enum.Font.PatrickHand
+								Title1.RichText = true
+								Title1.TextScaled = true
+								Title1.Text = v.Name
+								Title1.TextColor3 = Color3.fromRGB(255,255,255)
+								Title1.TextXAlignment = Enum.TextXAlignment.Left
+
+								Description.Size = UDim2.fromScale(1,0.441)
+								Description.Position = UDim2.fromScale(0, 0)
+								Description.BackgroundTransparency = 1
+								Description.Font = Enum.Font.PatrickHand
+								Description.RichText = true
+								Description.TextScaled = true
+								Description.Text = v.Name
+								Description.TextColor3 = Color3.fromRGB(200,200,200)
+								Description.TextXAlignment = Enum.TextXAlignment.Left
+
+								Icon.Size = UDim2.fromScale(1, 1)
+								Icon.Position = UDim2.fromScale(0, 0)
+								Icon.BackgroundTransparency = 0
+								Icon.Image = image
 							end
-							
-							
+
+
 							Button.MouseButton1Click:Connect(function()
 								Object.Value = v
 							end)
 						end		
 					end
 				end
-				
+
 				refresh(folder)
+				game:GetService("RunService").Heartbeat:Connect(function()
+					refresh(folder)
+				end)
+
 				local startC = Icon.ImageColor3
-				Players.PlayerAdded:Connect(refresh(folder))
-				Players.PlayerRemoving:Connect(refresh(folder))
-				Players.PlayerMembershipChanged:Connect(refresh(folder))
 				if typeB == 1 then
 					Active.MouseButton1Click:Connect(function()
 						TweenService:Create(Icon, TweenInfo.new(0.1), {ImageColor3 = Color3.fromRGB(85, 255, 0)}):Play()
 						pcall(function()
 							action(Object)
-							refresh(folder)
 						end)
 						wait(0.1)
 						TweenService:Create(Icon, TweenInfo.new(0.1), {ImageColor3 = startC}):Play()
@@ -756,25 +757,23 @@ function menu.Hub(name)
 							TweenService:Create(Icon, TweenInfo.new(0.1), {ImageColor3 = Color3.fromRGB(85, 255, 0)}):Play()
 							while toggled == true do
 								action(toggled, Object.Value)
-								refresh(folder)
 								wait()
 							end
 						elseif toggled == true then
 							toggled = false	
 							action(toggled)
-							refresh(folder)
 							TweenService:Create(Icon, TweenInfo.new(0.1), {ImageColor3 = startC}):Play()
 						end
 					end)
 				end
 			end
-			
+
 			return actions
-			
+
 		end
-		
+
 		return sec
-		
+
 	else
 		Player_Gui:FindFirstChild(name):Destroy()
 	end
