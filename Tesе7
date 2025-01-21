@@ -2,7 +2,7 @@ local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/TimkaZXC/
 local Hub = Lib.Hub("[🎄]Vexor PVP")
 local Kill = Hub:Section("[🎄]Kill", Color3.fromRGB(255,0,0))
 Kill:Title("[🎄]Kill's", Color3.fromRGB(255,0,0))
-Kill:Toggle("[🎄]Kill All (DUELS)", Color3.fromRGB(255,255,0), function(s)
+Kill:Toggle("[🎄]Kill All (DUELS)", Color3.fromRGB(255,0,0), function(s)
 local function Kill()
 for _, plrs in pairs(game.Players:GetChildren()) do
 if plrs.Name ~= game.Players.LocalPlayer.Name then
@@ -29,7 +29,7 @@ end
 
 end)
 
-Kill:Toggle("[🎄]Kill Opponent (DUELS)", Color3.fromRGB(255,255,0), function(s)
+Kill:Toggle("[🎄]Kill Opponent (DUELS)", Color3.fromRGB(255,0,0), function(s)
 local function Kill()
 for _, plr in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
 if plr.Name == "X1Plr" then
