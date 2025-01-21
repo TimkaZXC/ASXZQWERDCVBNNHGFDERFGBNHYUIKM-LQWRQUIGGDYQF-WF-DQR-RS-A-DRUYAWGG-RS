@@ -2,7 +2,57 @@ local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/TimkaZXC/
 local Hub = Lib.Hub("[🎄]Vexor PVP")
 local Kill = Hub:Section("[🎄]Kill", Color3.fromRGB(255,0,0))
 Kill:Title("[🎄]Kill's", Color3.fromRGB(255,0,0))
+Kill:Toggle("[🎄]Kill All (DUELS)", Color3.fromRGB(255,255,0), function(s)
+local function Kill()
+for _, plrs in pairs(game.Players:GetChildren()) do
+if plrs.Name ~= game.Players.LocalPlayer.Name then
+if plrs.Status.Duelo.Value == true then
+local args = {
+    [1] = "Arma",
+    [2] = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool"),
+    [3] = plrs.Character.Head,
+    [4] = plrs.Character.Head.Position,
+    [5] = Vector3.new(-0.0017826893599703908, -0.024152107536792755, 0.9997068047523499)
+}
 
+game:GetService("ReplicatedStorage").Events.DanoGeral:InvokeServer(unpack(args))
+end
+end
+end
+end
+
+if s then
+Kill()
+else
+print("")
+end
+
+end)
+
+Kill:Toggle("[🎄]Kill Opponent (DUELS)", Color3.fromRGB(255,255,0), function(s)
+local function Kill()
+for _, plr in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+if plr.Name == "X1Plr" then
+local args = {
+    [1] = "Arma",
+    [2] = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool"),
+    [3] = plr.Value.Character.Head,
+    [4] = plr.Value.Character.Head.Position,
+    [5] = Vector3.new(-0.0017826893599703908, -0.024152107536792755, 0.9997068047523499)
+}
+
+game:GetService("ReplicatedStorage").Events.DanoGeral:InvokeServer(unpack(args))
+end
+end
+end
+
+if s then
+Kill()
+else
+print("")
+end
+
+end)
 
 local Esp = Hub:Section("[🎄]Esp", Color3.fromRGB(255,255,0))
 Esp:Title("[🎄]Esp's", Color3.fromRGB(255,255,0))
@@ -102,33 +152,3 @@ end
 end
 
 end)
-
-for _, plr in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-if plr.Name == "X1Plr" then
-local args = {
-    [1] = "Arma",
-    [2] = game:GetService("Players").LocalPlayer.Character.Pistola,
-    [3] = plr.Value.Character.Head,
-    [4] = plr.Value.Character.Head.Position,
-    [5] = Vector3.new(-0.0017826893599703908, -0.024152107536792755, 0.9997068047523499)
-}
-
-game:GetService("ReplicatedStorage").Events.DanoGeral:InvokeServer(unpack(args))
-end
-end
-
-for _, plrs in pairs(game.Players:GetChildren()) do
-if plrs.Name ~= game.Players.LocalPlayer.Name then
-if plrs.Status.Duelo.Value == true then
-local args = {
-    [1] = "Arma",
-    [2] = game:GetService("Players").LocalPlayer.Character.Pistola,
-    [3] = plrs.Character.Head,
-    [4] = plrs.Character.Head.Position,
-    [5] = Vector3.new(-0.0017826893599703908, -0.024152107536792755, 0.9997068047523499)
-}
-
-game:GetService("ReplicatedStorage").Events.DanoGeral:InvokeServer(unpack(args))
-end
-end
-end
