@@ -735,7 +735,7 @@ function menu.Hub(name)
 				end
 
 				refresh(folder)
-				game:GetService("RunService").Heartbeat:Connect(function()
+				RunService.Heartbeat:Connect(function()
 					refresh(folder)
 				end)
 
@@ -771,16 +771,14 @@ function menu.Hub(name)
 			return actions
 
 		end
-
+		for _, obj in pairs(ScreenGui:GetDescendants()) do
+			local s, n = pcall(function()
+				obj.ClipsDescendants = true
+			end)
+		end
 		return sec
-
 	else
 		Player_Gui:FindFirstChild(name):Destroy()
-	end
-	for _, obj in pairs(ScreenGui:GetDescendants()) do
-		local s, n = pcall(function()
-			obj.ClipsDescendants = true
-		end)
 	end
 end
 
