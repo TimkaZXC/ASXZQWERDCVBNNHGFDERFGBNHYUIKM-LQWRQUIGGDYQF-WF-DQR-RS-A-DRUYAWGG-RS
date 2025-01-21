@@ -2,9 +2,10 @@ local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/TimkaZXC/
 local Hub = Lib.Hub("[🎄]Vexor PVP")
 local Esp = Hub:Section("[🎄]", Color3.fromRGB(255,255,0))
 Esp:Toggle("[🎄]", Color3.fromRGB(255,255,0), function(s)
-  if s then
-  local function EspBox(parent, name, color:Color3, thickness:number)
-		if parent:IsA("Part") or parent:IsA("MeshPart") then
+
+local function EspBox(parent, name, color:Color3, thickness:number)
+	if parent:IsA("Part") or parent:IsA("MeshPart") then
+
 			local BillboardGui = Instance.new("BillboardGui")
 			local Frame = Instance.new("Frame")
 			local UIStroke = Instance.new("UIStroke")
@@ -37,6 +38,7 @@ Esp:Toggle("[🎄]", Color3.fromRGB(255,255,0), function(s)
 			else
 				BillboardGui.Size = UDim2.fromScale(parent.Size.X, parent.Size.Y)
 			end
+
 			BillboardGui.AlwaysOnTop = true
 			BillboardGui.Enabled = true
 
@@ -51,8 +53,10 @@ Esp:Toggle("[🎄]", Color3.fromRGB(255,255,0), function(s)
 			Frame.Parent = BillboardGui
 			UIStroke.Parent = Frame
 			BillboardGui.Name = "Player_ "..parent.Name
-            end
 	end
+end
+
+if s then
 
 for _, player in pairs(game.Players:GetPlayers()) do
 if player.Name ~= game.Players.LocalPlayer.Name then
@@ -69,13 +73,15 @@ end
 end
 end
 end
+
 else
+
 for _, player in pairs(game.Players:GetPlayers()) do
 if player.Name ~= game.Players.LocalPlayer.Name then
 for _, part in pairs(player.Character:GetChildren()) do
 if part:IsA("Part") or part:IsA("MeshPart") then 
 if not part:FindFirstChildOfClass("BillboardGui") then
-print("GOOD")
+warn("GOOD")
 else
 part:FindFirstChildOfClass("BillboardGui"):Destroy()
 end
@@ -83,7 +89,7 @@ end
 end
 end
 end
-end
+
 end
 
 end)
