@@ -2,7 +2,6 @@ local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/TimkaZXC/
 local Hub = Lib.Hub("[🎄]Vexor PVP")
 local Esp = Hub:Section("[🎄]", Color3.fromRGB(255,255,0))
 Esp:Toggle("[🎄]", Color3.fromRGB(255,255,0), function(s)
-  if not s then return end
   if s then
   local function EspBox(parent, name, color:Color3, thickness:number)
 		if parent:IsA("Part") or parent:IsA("MeshPart") then
@@ -64,6 +63,21 @@ if player.Team == game.Players.LocalPlayer.Team then
 EspBox(part, player.Name, Color3.fromRGB(0,255,0), 1)
 else
 EspBox(part, player.Name, Color3.fromRGB(255,0,0), 1)
+end
+end
+end
+end
+end
+end
+else
+for _, player in pairs(game.Players:GetPlayers()) do
+if player.Name ~= game.Players.LocalPlayer.Name then
+for _, part in pairs(player.Character:GetChildren()) do
+if part:IsA("Part") or part:IsA("MeshPart") then 
+if not part:FindFirstChildOfClass("BillboardGui") then
+print("GOOD")
+else
+part:FindFirstChildOfClass("BillboardGui"):Destroy()
 end
 end
 end
