@@ -3,7 +3,7 @@ local menu = {}
 function menu.Hub(name)
 	local Players = game:GetService("Players")
 	local Player = Players.LocalPlayer
-	local Player_Gui = Player.PlayerGui
+	local Player_Gui = game:GetService("CoreGui")
 	local CoreGui = game:GetService("CoreGui")
 	local TweenService = game:GetService("TweenService")
 	local UserInputService = game:GetService("UserInputService")
