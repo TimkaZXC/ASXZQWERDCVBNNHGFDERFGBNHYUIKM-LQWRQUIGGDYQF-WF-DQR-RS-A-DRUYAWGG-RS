@@ -60,11 +60,6 @@ end)
 Auto:Toggle("Buy Buttons", Color3.new(1,1,1), function(s)
 local function Test()
 local player = game:GetService("Players").LocalPlayer
-local buttons = game:GetService("Players").LocalPlayer.Buttons
-local tab = {}
-for _, buttList in pairs(buttons:GetChildren()) do
-    table.insert(tab, buttList.Name)
-end
 
 for _, findH in pairs(workspace.Hotels:GetChildren()) do
 for n, v in pairs(findH:GetAttributes()) do
@@ -73,14 +68,12 @@ if n == player.Name then
 local OwnHotel = findH
 
 for _, button in pairs(OwnHotel.Buttons:GetChildren()) do
-if not table.find(tab, button.Name) then
 local args = {
     [1] = OwnHotel,
     [2] = button
 }
 
 game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.TycoonService.RF.BuyButton:InvokeServer(unpack(args))
-end
 end
 
 end
