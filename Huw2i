@@ -1,0 +1,68 @@
+local req = loadstring(game:HttpGet("https://raw.githubusercontent.com/TimkaZXC/ASXZQWERDCVBNNHGFDERFGBNHYUIKM-LQWRQUIGGDYQF-WF-DQR-RS-A-DRUYAWGG-RS/refs/heads/main/Library_V3"))()
+
+local Hub = req.Hub("Hotel")
+local Auto = Hub:Section("Auto")
+Auto:Toggle("Get Cash", Color3.new(1,1,1), function(s)
+local function Test()
+pcall(function()
+local test = {
+    [1] = 10
+}
+
+game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.TycoonService.RF.ClaimDaily:InvokeServer(unpack(test))
+end)
+end
+
+if s then
+Test()
+else
+
+end
+end)
+
+Auto:Toggle("Get Stars", Color3.new(1,1,1), function(s)
+local function Test()
+pcall(function()
+local test = {
+    [1] = 1
+}
+
+game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.TycoonService.RF.ClaimDaily:InvokeServer(unpack(test))
+end)
+end
+
+if s then
+Test()
+else
+
+end
+end)
+
+Auto:Toggle("Get Friend", Color3.new(1,1,1), function(s)
+local function Test()
+pcall(function()
+local ID = math.random(1000000000, 99999999999)
+local args = {
+    [1] = ID
+}
+
+game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.TycoonService.RF.InviteFriend:InvokeServer(unpack(args))
+end)
+end
+
+if s then
+Test()
+else
+
+end
+end)
+
+workspace.Hotels
+game:GetService("Players").LocalPlayer
+game:GetService("Players").LocalPlayer.Buttons
+local args = {
+    [1] = workspace.Hotels.Hotel1,
+    [2] = workspace.Hotels.Hotel1.Buttons.Room1
+}
+
+game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.7.0").knit.Services.TycoonService.RF.BuyButton:InvokeServer(unpack(args))
