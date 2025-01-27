@@ -1,24 +1,39 @@
-local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/TimkaZXC/ASXZQWERDCVBNNHGFDERFGBNHYUIKM-LQWRQUIGGDYQF-WF-DQR-RS-A-DRUYAWGG-RS/refs/heads/main/Library_V2"))()
+local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/TimkaZXC/ASXZQWERDCVBNNHGFDERFGBNHYUIKM-LQWRQUIGGDYQF-WF-DQR-RS-A-DRUYAWGG-RS/refs/heads/main/Library_V3"))()
 local Hub = Lib.Hub("🍀[🎄]Undead Defense")
 local Kill = Hub:Section("[🎄]Main", Color3.fromRGB(255,0,0))
 Kill:Title("[🎄]Kill Aura's", Color3.fromRGB(255,0,0))
 Kill:Toggle("[🧟‍♂️]Zombie", Color3.new(1,1,1), function(s)
-local function Test()
-pcall(function()
-for _, plr in pairs(workspace.Living:GetChildren()) do
-if plr:IsA("Model") then
-
+local function Test(mob)
 local player = game:GetService("Players").LocalPlayer
-local distance = (player.Character.HumanoidRootPart.Position - plr:FindFirstChildOfClass("Part").Position or plr:FindFirstChildOfClass("MeshPart").Position).Magnitude
-if distance < 15 then
-if plr.Name ~= player.Name then
+if mob then
+if mob.Name ~= player.Name then
 
+local mesh = mob:FindFirstChildOfClass("MeshPart")
+local part = mob:FindFirstChildOfClass("Part")
+if mesh then
+local distance = (player.Character:WaitForChild("HumanoidRootPart").Positionn - mesh.Position).Magnitude
+if distance < 15 then
 local args = {
     [1] = {
-        ["Instance"] = plr:FindFirstChildOfClass("Part") or plr:FindFirstChildOfClass("MeshPart"),
+        ["Instance"] =  mesh,
         ["Material"] = Enum.Material.Neon,
         ["Normal"] = Vector3.new(0, 999, 0),
-        ["Position"] = plr:FindFirstChildOfClass("Part").Position or plr:FindFirstChildOfClass("MeshPart").Position
+        ["Position"] = mesh.Position
+    },
+    [2] = Vector3.new(0, 999, 0)
+}
+
+game:GetService("ReplicatedStorage").Remotes.GunSystem.SwingMelee:FireServer(unpack(args))
+end
+elseif part then
+local distance = (player.Character:WaitForChild("HumanoidRootPart").Position - part.Position).Magnitude
+if distance < 15 then
+local args = {
+    [1] = {
+        ["Instance"] =  part,
+        ["Material"] = Enum.Material.Neon,
+        ["Normal"] = Vector3.new(0, 999, 0),
+        ["Position"] = part.Position
     },
     [2] = Vector3.new(0, 999, 0)
 }
@@ -30,11 +45,15 @@ end
 end
 end
 
-end)
 end
 
 if s then
-Test()
+for _, mob in pairs(workspace.Living.Friendly:GetChildren()) do
+if mob:IsA("Model") then
+Test(mob)
+print(mob)
+end
+end
 else
 
 end
