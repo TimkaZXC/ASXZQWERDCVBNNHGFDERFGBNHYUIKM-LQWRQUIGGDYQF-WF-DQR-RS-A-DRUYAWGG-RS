@@ -4,7 +4,7 @@ local Kill = Hub:Section("[🎄]Main", Color3.fromRGB(255,0,0))
 Kill:Title("[🎄]Kill Aura's", Color3.fromRGB(255,0,0))
 Kill:Toggle("[🧟‍♂️]Zombie", Color3.new(1,1,1), function(s)
 local function Test(mob)
-while wait() do
+local RunService = game:GetService("RunService")
 for _, mob in pairs(workspace.Living:GetChildren()) do
     if mob and mob:IsA("Model") then
     if mob:FindFirstChild("HumanoidRootPart") then
@@ -23,14 +23,16 @@ game:GetService("ReplicatedStorage").Remotes.GunSystem.SwingMelee:FireServer(unp
         end
     end
 end
-end
 
 end
 end
 
 if s then
+RunService.Heartbeat:Connect(function()
 Test()
+end)
 else
+
 end
 end)
 
