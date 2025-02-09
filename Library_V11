@@ -334,7 +334,7 @@ function menu.Hub(name)
 		r_t.TextScaled = true
 
 		--[Setting Buttons]
-		SettingB('Esp (Check Team)', Sc_f, c_t.TextColor3, 2,function(s)
+		SettingB('Esp (Check Team)', Sc_f, c_t.TextColor3, 2,function(val)
 			pcall(function()
 				local function GetItem(player1:Player)
 					if player1 and player1 ~= player then
