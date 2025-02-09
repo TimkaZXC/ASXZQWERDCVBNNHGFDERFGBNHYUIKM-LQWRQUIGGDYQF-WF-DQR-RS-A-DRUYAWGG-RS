@@ -172,8 +172,8 @@ function menu.Hub(name)
 
 	end
 
-	if not CoreGui:FindFirstChild(name) then
-		local ScreenGui = Instance.new("ScreenGui", CoreGui)
+	if not Player_Gui:FindFirstChild(name) then
+		local ScreenGui = Instance.new("ScreenGui", Player_Gui)
 		ScreenGui.Name = name
 		ScreenGui.ResetOnSpawn = false
 		ScreenGui.IgnoreGuiInset = true
@@ -338,6 +338,8 @@ function menu.Hub(name)
 			pcall(function()
 				local Players = game:GetService("Players")
 				local Player = Players.LocalPlayer
+				local List = Instance.new('Folder', CoreGui)
+				List.Name = `Esp's`
 				local function EspOn(key:Player)
 					if key then
 						local NPlayer = key
@@ -348,7 +350,7 @@ function menu.Hub(name)
 								if block:IsA("BasePart") then
 									if not block:FindFirstChildOfClass('BoxHandleAdornment') then
 										local newAdornment = Instance.new("BoxHandleAdornment")
-										newAdornment.Parent = block
+										newAdornment.Parent = List
 										newAdornment.Adornee = block
 
 										newAdornment.Transparency = 0.75
@@ -1011,7 +1013,7 @@ function menu.Hub(name)
 		end
 		return sec
 	else
-		CoreGui:FindFirstChild(name):Destroy()
+		Player_Gui:FindFirstChild(name):Destroy()
 	end
 end
 
