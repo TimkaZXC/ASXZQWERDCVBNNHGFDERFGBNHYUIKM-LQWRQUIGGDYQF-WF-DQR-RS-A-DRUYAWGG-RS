@@ -172,8 +172,8 @@ function menu.Hub(name)
 
 	end
 
-	if not Player_Gui:FindFirstChild(name) then
-		local ScreenGui = Instance.new("ScreenGui", Player_Gui)
+	if not CoreGui:FindFirstChild(name) then
+		local ScreenGui = Instance.new("ScreenGui", CoreGui)
 		ScreenGui.Name = name
 		ScreenGui.ResetOnSpawn = false
 		ScreenGui.IgnoreGuiInset = true
@@ -1011,7 +1011,7 @@ function menu.Hub(name)
 		end
 		return sec
 	else
-		Player_Gui:FindFirstChild(name):Destroy()
+		CoreGui:FindFirstChild(name):Destroy()
 	end
 end
 
