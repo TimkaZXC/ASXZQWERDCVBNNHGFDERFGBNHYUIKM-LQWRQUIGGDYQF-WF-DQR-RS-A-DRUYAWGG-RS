@@ -348,7 +348,9 @@ function menu.Hub(name)
 						for _, block in pairs(NChar:GetChildren()) do
 							if block then
 								if block:IsA("BasePart") then
-									if not block:FindFirstChildOfClass('BoxHandleAdornment') then
+									if not List:FindFirstChild(`{key.Name}_ESP`) then
+										local keys = Instance.new('Folder', List)
+										keys.Name = `{key.Name}_ESP`
 										local newAdornment = Instance.new("BoxHandleAdornment")
 										newAdornment.Parent = List
 										newAdornment.Adornee = block
