@@ -3,7 +3,7 @@ local menu = {}
 function menu.Hub(name)
 	local Players = game:GetService("Players")
 	local Player = Players.LocalPlayer
-	local Player_Gui = game:GetService("CoreGui")
+	local Player_Gui = Player.PlayerGui
 	local CoreGui = game:GetService("CoreGui")
 	local TweenService = game:GetService("TweenService")
 	local UserInputService = game:GetService("UserInputService")
@@ -123,9 +123,57 @@ function menu.Hub(name)
 		scroll.ScrollBarThickness = 0
 		return scroll
 	end
+	
+	local function SettingB(name:string, parent:Frame, color:Color3, typeButton:number, functions:FunctionalTest)
+		local Button = Instance.new("TextButton", parent)
+		local Title = Instance.new('TextLabel', Button)
+		Button.MaxVisibleGraphemes = 0
+		Button.BackgroundColor3 = Color3.fromRGB(85,85,85)
+		Button.BackgroundTransparency = 0.65
+		Button.Size = UDim2.fromScale(1,0.135)
+		Title.Text = name
+		Title.BackgroundTransparency = 1
+		Title.Position = UDim2.fromScale(0.02, 0)
+		Title.Size = UDim2.fromScale(0.973, 0.962)
+		Title.Font = Enum.Font.PatrickHand
+		Title.RichText = true
+		Title.TextScaled = true
+		Title.TextColor3 = Color3.fromRGB(255,255,255)
+		Title.TextXAlignment = Enum.TextXAlignment.Left
+		Inco(Button, color)
+		local toggle = false
+		if typeButton == 1 then
+			if functions then
+				Button.MouseButton1Click:Connect(function()
+					functions()
+					TweenService:Create(Title, TweenInfo.new(0.1), {TextColor3 = Color3.fromRGB(150,255,255)})
+					wait(0.1)
+					TweenService:Create(Title, TweenInfo.new(0.1), {TextColor3 = Color3.fromRGB(255,255,255)})
+				end)
+			end
+		elseif typeButton == 2 then
+			if functions then
+				Button.MouseButton1Click:Connect(function()
+					if toggle == false then
+						toggle = true
+						while toggle == true do
+							TweenService:Create(Title, TweenInfo.new(0.1), {TextColor3 = Color3.fromRGB(150,255,255)})
+							functions(toggle)
+							wait()
+						end
+					elseif toggle == true then
+						toggle = false	
+						TweenService:Create(Title, TweenInfo.new(0.1), {TextColor3 = Color3.fromRGB(255,255,255)})
+						functions(toggle)
+					end
+				end)
+			end
+		end
+		
+	end
 
-	if not Player_Gui:FindFirstChild(name) then
-		local ScreenGui = Instance.new("ScreenGui", Player_Gui)
+	if not CoreGui:FindFirstChild(name) then
+		local ScreenGui = Instance.new("ScreenGui", CoreGui)
 		ScreenGui.Name = name
 		ScreenGui.ResetOnSpawn = false
 		ScreenGui.IgnoreGuiInset = true
@@ -284,6 +332,175 @@ function menu.Hub(name)
 		r_t.Text = "Hub_Setting"
 		r_t.TextColor3 = Color3.fromRGB(255,255,255)
 		r_t.TextScaled = true
+		
+		--[Setting Buttons]
+		SettingB('Esp (Check Team)', Sc_f, c_t.TextColor3, 2,function(s)
+			local function EspOn(key:Player)
+				if key then
+					local NPlayer = key
+					local NChar = NPlayer.Character or NPlayer.CharacterAdded:Wait()
+
+					for _, block in pairs(NChar:GetChildren()) do
+						if block:IsA("BasePart") then
+							if not block:FindFirstChildOfClass('BoxHandleAdornment') then
+								local newAdornment = Instance.new("BoxHandleAdornment")
+								newAdornment.Parent = block
+								newAdornment.Adornee = block
+
+								newAdornment.Transparency = 0.75
+								newAdornment.AlwaysOnTop = true
+								newAdornment.ZIndex = 10
+
+								if block.Name ~= 'Head' then
+									newAdornment.Size = block.Size
+								end
+
+								if NPlayer.Team ~= Player.Team then
+									newAdornment.Color3 = Color3.new(1,0,0)
+								else
+									newAdornment.Color3 = Color3.new(0,1,0)
+								end
+
+								RunService.Heartbeat:Connect(function()
+									if NPlayer.Team ~= Player.Team then
+										newAdornment.Color3 = Color3.new(1,0,0)
+									else
+										newAdornment.Color3 = Color3.new(0,1,0)
+									end
+								end)
+
+								NChar:FindFirstChild("Humanoid").Died:Connect(function()
+									newAdornment:Destroy()
+								end)
+							end
+						end
+					end
+				end
+			end
+
+			if s then
+				for _, plrs in pairs(Players:GetChildren()) do
+					if plrs and plrs ~= Player then
+						EspOn(plrs)
+					end
+				end
+			else
+				for _, plrs in pairs(Players:GetChildren()) do
+					if plrs and plrs ~= Player then
+						for _, findAdornment in pairs(plrs.Character:GetDescendants()) do
+							if findAdornment:IsA('BoxHandleAdornment') then
+								findAdornment:Destroy()
+							end
+
+						end
+
+					end
+				end
+			end
+		end)
+		
+		SettingB('Aim (All)', Sc_f, c_t.TextColor3, 2,function(s)
+			local function AimOn()
+				local origin = Player.Character.Head.Position
+				local camera = workspace.CurrentCamera
+
+				for _, plr in pairs(Players:GetPlayers()) do
+					if plr.Name ~= Player.Name then
+						local target = plr.Character.Head.Position
+						local direction = (target - origin)
+						local rayParams = RaycastParams.new()
+
+						local Exclude = {Player.Character:GetDescendants()}
+
+						for _, acce in pairs(plr.Character:GetChildren()) do
+							if acce:IsA("Accessory") then
+								table.insert(Exclude, acce)
+								table.insert(Exclude, acce:FindFirstChildOfClass("Part"))
+							end
+						end
+
+						rayParams.FilterType = Enum.RaycastFilterType.Exclude
+						rayParams.FilterDescendantsInstances = Exclude
+
+						local result = workspace:Raycast(origin, direction, rayParams)
+						if result and result.Instance then
+							local hit = result.Instance
+							if plr.Character.Humanoid.Health > 0 then
+								if hit == plr.Character.Head then
+									camera.CameraType = Enum.CameraType.Scriptable
+									camera.CFrame = CFrame.lookAt(Player.Character.Head.Position, plr.Character.Head.Position)
+								else
+									camera.CameraType = Enum.CameraType.Custom
+								end
+							else
+								camera.CameraType = Enum.CameraType.Custom
+							end
+						else
+							camera.CameraType = Enum.CameraType.Custom
+						end
+
+					end
+				end
+			end
+
+			if s then
+				AimOn()
+			else
+				camera.CameraType = Enum.CameraType.Custom
+			end
+		end)
+		
+		SettingB('Aim (TeamCheck)', Sc_f, c_t.TextColor3, 2,function(s)
+			local function AimOn()
+				local origin = Player.Character.Head.Position
+				local camera = workspace.CurrentCamera
+
+				for _, plr in pairs(Players:GetPlayers()) do
+					if plr.Name ~= Player.Name and plr.Team ~= Player.Team then
+						local target = plr.Character.Head.Position
+						local direction = (target - origin)
+						local rayParams = RaycastParams.new()
+
+						local Exclude = {Player.Character:GetDescendants()}
+
+						for _, acce in pairs(plr.Character:GetChildren()) do
+							if acce:IsA("Accessory") then
+								table.insert(Exclude, acce)
+								table.insert(Exclude, acce:FindFirstChildOfClass("Part"))
+							end
+						end
+
+						rayParams.FilterType = Enum.RaycastFilterType.Exclude
+						rayParams.FilterDescendantsInstances = Exclude
+
+						local result = workspace:Raycast(origin, direction, rayParams)
+						if result and result.Instance then
+							local hit = result.Instance
+							if plr.Character.Humanoid.Health > 0 then
+								if hit == plr.Character.Head then
+									camera.CameraType = Enum.CameraType.Scriptable
+									camera.CFrame = CFrame.lookAt(Player.Character.Head.Position, plr.Character.Head.Position)
+								else
+									camera.CameraType = Enum.CameraType.Custom
+								end
+							else
+								camera.CameraType = Enum.CameraType.Custom
+							end
+						else
+							camera.CameraType = Enum.CameraType.Custom
+						end
+
+					end
+				end
+			end
+
+			if s then
+				AimOn()
+			else
+				camera.CameraType = Enum.CameraType.Custom
+			end
+		end)
+		--[End]
 
 		Open.MouseButton1Click:Connect(function()
 			if Panel_Background.Visible == false then
@@ -735,7 +952,7 @@ function menu.Hub(name)
 				end
 
 				refresh(folder)
-				RunService.Heartbeat:Connect(function()
+				game:GetService("RunService").Heartbeat:Connect(function()
 					refresh(folder)
 				end)
 
