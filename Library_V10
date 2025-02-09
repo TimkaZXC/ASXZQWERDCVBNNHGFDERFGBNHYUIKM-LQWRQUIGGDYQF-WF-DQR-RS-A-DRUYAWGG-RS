@@ -336,64 +336,65 @@ function menu.Hub(name)
 		--[Setting Buttons]
 		SettingB('Esp (Check Team)', Sc_f, c_t.TextColor3, 2,function(s)
 			pcall(function()
-				local Players = game:GetService("Players")
-				local Player = Players.LocalPlayer
-				local List = Instance.new('Folder', CoreGui)
-				List.Name = `Esp's`
-				local function EspOn(key:Player)
-					if key then
-						local NPlayer = key
-						local NChar = NPlayer.Character or NPlayer.CharacterAdded:Wait()
-						if not List:FindFirstChild(`{key.Name}_ESP`) then
-							local keys = Instance.new('Folder', List)
-							keys.Name = `{key.Name}_ESP`
-							for _, block in pairs(NChar:GetChildren()) do
-								if block then
-									if block:IsA("BasePart") then
-										local newAdornment = Instance.new("BoxHandleAdornment")
-										newAdornment.Parent = keys
-										newAdornment.Adornee = block
+				local function GetItem(player1:Player)
+					if player1 and player1 ~= player then
+						for _, part in pairs(player1.Character:GetChildren()) do
+							if part:IsA('BasePart') then
+								if not part:FindFirstChild(`{player1.Name}_ESP`) then
 
-										newAdornment.Transparency = 0.75
-										newAdornment.AlwaysOnTop = true
-										newAdornment.ZIndex = 10
+									local Glow_Gui = Instance.new('BillboardGui', part)
+									local Outline = Instance.new('Frame', Glow_Gui)
+									local Stroke = Instance.new('UIStroke', Outline)
 
-										if block.Name ~= 'Head' then
-											newAdornment.Size = block.Size
-										end
+									Glow_Gui.AlwaysOnTop = true
+									Glow_Gui.Name = `{player1.Name}_ESP`
+									Glow_Gui.Adornee = part
 
-										if NPlayer.Team ~= Player.Team then
-											newAdornment.Color3 = Color3.new(1,0,0)
-										else
-											newAdornment.Color3 = Color3.new(0,1,0)
-										end
+									Outline.BackgroundTransparency = 1
+									Outline.Position = UDim2.fromScale(0.025, 0.025)
+									Outline.Size = UDim2.fromScale(0.95, 0.95)
 
-										RunService.Heartbeat:Connect(function()
-											if NPlayer.Team ~= Player.Team then
-												newAdornment.Color3 = Color3.new(1,0,0)
-											else
-												newAdornment.Color3 = Color3.new(0,1,0)
-											end
-										end)
-
-										NChar:FindFirstChild("Humanoid").Died:Connect(function()
-											keys:Destroy()
-										end)
+									if player1.Team ~= player.Team then
+										Stroke.Color = Color3.fromRGB(255, 0, 0)
+									else
+										Stroke.Color = Color3.fromRGB(0, 255, 0)
 									end
+
+									if part.Name ~= 'Head' then
+										Glow_Gui.Size = UDim2.fromScale(part.Size.X, part.Size.Y)
+									else
+										Glow_Gui.Size = UDim2.fromScale(part.Size.Y, part.Size.Z)
+									end
+
+									player1:GetPropertyChangedSignal('Team'):Connect(function()
+										if player1.Team ~= player.Team then
+											Stroke.Color = Color3.fromRGB(255, 0, 0)
+										else
+											Stroke.Color = Color3.fromRGB(0, 255, 0)
+										end
+									end)
+
+									player1.Character:WaitForChild('Humanoid').Died:Connect(function()
+										Glow_Gui:Destroy()
+									end)
 								end
 							end
 						end
 					end
 				end
 
-				if s then
-					for _, plrs in pairs(Players:GetChildren()) do
-						if plrs and plrs ~= Player then
-							EspOn(plrs)
-						end
+				if val then
+					for _, item in pairs(Players:GetChildren()) do
+						GetItem(item)
 					end
 				else
-					List:Destroy()
+					for _, item in pairs(Players:GetChildren()) do
+						for _, esp in pairs(item.Character:GetDescendants()) do
+							if esp.Name == `{item.Name}_ESP` then
+								esp:Destroy()
+							end
+						end
+					end
 				end
 			end)
 		end)
