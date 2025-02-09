@@ -336,181 +336,184 @@ function menu.Hub(name)
 		--[Setting Buttons]
 		SettingB('Esp (Check Team)', Sc_f, c_t.TextColor3, 2,function(s)
 			pcall(function()
-			local Players = game:GetService("Players")
-			local Player = Players.LocalPlayer
-			local function EspOn(key:Player)
-				if key then
-					local NPlayer = key
-					local NChar = NPlayer.Character or NPlayer.CharacterAdded:Wait()
+				local Players = game:GetService("Players")
+				local Player = Players.LocalPlayer
+				local function EspOn(key:Player)
+					if key then
+						local NPlayer = key
+						local NChar = NPlayer.Character or NPlayer.CharacterAdded:Wait()
 
-					for _, block in pairs(NChar:GetChildren()) do
-						if block:IsA("BasePart") then
-							if not block:FindFirstChildOfClass('BoxHandleAdornment') then
-								local newAdornment = Instance.new("BoxHandleAdornment")
-								newAdornment.Parent = block
-								newAdornment.Adornee = block
+						for _, block in pairs(NChar:GetChildren()) do
+							if block then
+								if block:IsA("BasePart") then
+									if not block:FindFirstChildOfClass('BoxHandleAdornment') then
+										local newAdornment = Instance.new("BoxHandleAdornment")
+										newAdornment.Parent = block
+										newAdornment.Adornee = block
 
-								newAdornment.Transparency = 0.75
-								newAdornment.AlwaysOnTop = true
-								newAdornment.ZIndex = 10
+										newAdornment.Transparency = 0.75
+										newAdornment.AlwaysOnTop = true
+										newAdornment.ZIndex = 10
 
-								if block.Name ~= 'Head' then
-									newAdornment.Size = block.Size
-								end
+										if block.Name ~= 'Head' then
+											newAdornment.Size = block.Size
+										end
 
-								if NPlayer.Team ~= Player.Team then
-									newAdornment.Color3 = Color3.new(1,0,0)
-								else
-									newAdornment.Color3 = Color3.new(0,1,0)
-								end
+										if NPlayer.Team ~= Player.Team then
+											newAdornment.Color3 = Color3.new(1,0,0)
+										else
+											newAdornment.Color3 = Color3.new(0,1,0)
+										end
 
-								RunService.Heartbeat:Connect(function()
-									if NPlayer.Team ~= Player.Team then
-										newAdornment.Color3 = Color3.new(1,0,0)
-									else
-										newAdornment.Color3 = Color3.new(0,1,0)
+										RunService.Heartbeat:Connect(function()
+											if NPlayer.Team ~= Player.Team then
+												newAdornment.Color3 = Color3.new(1,0,0)
+											else
+												newAdornment.Color3 = Color3.new(0,1,0)
+											end
+										end)
+
+										NChar:FindFirstChild("Humanoid").Died:Connect(function()
+											newAdornment:Destroy()
+										end)
 									end
-								end)
-
-								NChar:FindFirstChild("Humanoid").Died:Connect(function()
-									newAdornment:Destroy()
-								end)
+								end
 							end
 						end
 					end
 				end
-			end
 
-			if s then
-				for _, plrs in pairs(Players:GetChildren()) do
-					if plrs and plrs ~= Player then
-						EspOn(plrs)
+				if s then
+					for _, plrs in pairs(Players:GetChildren()) do
+						if plrs and plrs ~= Player then
+							EspOn(plrs)
+						end
 					end
-				end
-			else
-				for _, plrs in pairs(Players:GetChildren()) do
-					if plrs and plrs ~= Player then
-						for _, findAdornment in pairs(plrs.Character:GetDescendants()) do
-							if not findAdornment:IsA('BoxHandleAdornment') then
-								print("TEST")
-							else
-
-								findAdornment:Destroy()
+				else
+					for _, plrs in pairs(Players:GetChildren()) do
+						if plrs and plrs ~= Player then
+							for _, findAdornment in pairs(plrs.Character:GetDescendants()) do
+								if findAdornment then
+									if not findAdornment:IsA('BoxHandleAdornment') then
+										print("TEST")
+									else
+										findAdornment:Destroy()
+									end
+								end
 							end
 						end
 					end
 				end
-			end
 			end)
 		end)
 
 		SettingB('Aim (All)', Sc_f, c_t.TextColor3, 2,function(s)
 			pcall(function()
-			local Players = game:GetService("Players")
-			local Player = Players.LocalPlayer
-			local function AimOn()
-				local origin = Player.Character.Head.Position
-				local camera = workspace.CurrentCamera
+				local Players1 = game:GetService('Players')
+				local Player1 = Players1.LocalPlayer
+				local function AimOn()
+					local origin = Player1.Character:WaitForChild("Head").Position
+					local camera = workspace.CurrentCamera
 
-				for _, plr in pairs(Players:GetPlayers()) do
-					if plr.Name ~= Player.Name then
-						local target = plr.Character.Head.Position
-						local direction = (target - origin)
-						local rayParams = RaycastParams.new()
+					for _, plr in pairs(Players1:GetPlayers()) do
+						if plr.Name ~= Player1.Name then
+							local target = plr.Character:WaitForChild("Head").Position
+							local direction = (target - origin)
+							local rayParams = RaycastParams.new()
 
-						local Exclude = {Player.Character:GetDescendants()}
+							local Exclude = {Player1.Character:GetChildren()}
 
-						for _, acce in pairs(plr.Character:GetChildren()) do
-							if acce:IsA("Accessory") then
-								table.insert(Exclude, acce)
-								table.insert(Exclude, acce:FindFirstChildOfClass("Part"))
+							for _, acce in pairs(plr.Character:GetChildren()) do
+								if acce:IsA("Accessory") then
+									table.insert(Exclude, acce)
+									table.insert(Exclude, acce:FindFirstChildOfClass("Part"))
+								end
 							end
-						end
 
-						rayParams.FilterType = Enum.RaycastFilterType.Exclude
-						rayParams.FilterDescendantsInstances = Exclude
+							rayParams.FilterType = Enum.RaycastFilterType.Exclude
+							rayParams.FilterDescendantsInstances = Exclude
 
-						local result = workspace:Raycast(origin, direction, rayParams)
-						if result and result.Instance then
-							local hit = result.Instance
-							if plr.Character.Humanoid.Health > 0 then
-								if hit == plr.Character.Head then
-									camera.CameraType = Enum.CameraType.Scriptable
-									camera.CFrame = CFrame.lookAt(Player.Character.Head.Position, plr.Character.Head.Position)
+							local result = workspace:Raycast(origin, direction, rayParams)
+							if result and result.Instance then
+								local hit = result.Instance
+								if plr.Character:WaitForChild("Humanoid").Health > 0 then
+									if hit == plr.Character:WaitForChild("Head") then
+										camera.CameraType = Enum.CameraType.Track
+										camera.CFrame = CFrame.lookAt(Player1.Character:WaitForChild("Head").Position, plr.Character:WaitForChild("Head").Position)
+									else
+										camera.CameraType = Enum.CameraType.Custom
+									end
 								else
 									camera.CameraType = Enum.CameraType.Custom
 								end
 							else
 								camera.CameraType = Enum.CameraType.Custom
 							end
-						else
-							camera.CameraType = Enum.CameraType.Custom
-						end
 
+						end
 					end
 				end
-			end
 
-			if s then
-				AimOn()
-			else
-				camera.CameraType = Enum.CameraType.Custom
-			end
+				if s then
+					AimOn()
+				else
+					camera.CameraType = Enum.CameraType.Custom
+				end
 			end)
 		end)
 
 		SettingB('Aim (TeamCheck)', Sc_f, c_t.TextColor3, 2,function(s)
 			pcall(function()
-			local Players = game:GetService("Players")
-			local Player = Players.LocalPlayer
-			local function AimOn()
-				local origin = Player.Character.Head.Position
-				local camera = workspace.CurrentCamera
+				local Players1 = game:GetService('Players')
+				local Player1 = Players1.LocalPlayer
+				local function AimOn()
+					local origin = Player1.Character:WaitForChild("Head").Position
+					local camera = workspace.CurrentCamera
 
-				for _, plr in pairs(Players:GetPlayers()) do
-					if plr.Name ~= Player.Name and plr.Team ~= Player.Team then
-						local target = plr.Character.Head.Position
-						local direction = (target - origin)
-						local rayParams = RaycastParams.new()
+					for _, plr in pairs(Players1:GetPlayers()) do
+						if plr.Name ~= Player1.Name and plr.Team ~= Player1.Team then
+							local target = plr.Character:WaitForChild("Head").Position
+							local direction = (target - origin)
+							local rayParams = RaycastParams.new()
 
-						local Exclude = {Player.Character:GetDescendants()}
+							local Exclude = {Player1.Character:GetChildren()}
 
-						for _, acce in pairs(plr.Character:GetChildren()) do
-							if acce:IsA("Accessory") then
-								table.insert(Exclude, acce)
-								table.insert(Exclude, acce:FindFirstChildOfClass("Part"))
+							for _, acce in pairs(plr.Character:GetChildren()) do
+								if acce:IsA("Accessory") then
+									table.insert(Exclude, acce)
+									table.insert(Exclude, acce:FindFirstChildOfClass("Part"))
+								end
 							end
-						end
 
-						rayParams.FilterType = Enum.RaycastFilterType.Exclude
-						rayParams.FilterDescendantsInstances = Exclude
+							rayParams.FilterType = Enum.RaycastFilterType.Exclude
+							rayParams.FilterDescendantsInstances = Exclude
 
-						local result = workspace:Raycast(origin, direction, rayParams)
-						if result and result.Instance then
-							local hit = result.Instance
-							if plr.Character.Humanoid.Health > 0 then
-								if hit == plr.Character.Head then
-									camera.CameraType = Enum.CameraType.Scriptable
-									camera.CFrame = CFrame.lookAt(Player.Character.Head.Position, plr.Character.Head.Position)
+							local result = workspace:Raycast(origin, direction, rayParams)
+							if result and result.Instance then
+								local hit = result.Instance
+								if plr.Character:WaitForChild("Humanoid").Health > 0 then
+									if hit == plr.Character:WaitForChild("Head") then
+										camera.CameraType = Enum.CameraType.Track
+										camera.CFrame = CFrame.lookAt(Player1.Character:WaitForChild("Head").Position, plr.Character:WaitForChild("Head").Position)
+									else
+										camera.CameraType = Enum.CameraType.Custom
+									end
 								else
 									camera.CameraType = Enum.CameraType.Custom
 								end
 							else
 								camera.CameraType = Enum.CameraType.Custom
 							end
-						else
-							camera.CameraType = Enum.CameraType.Custom
-						end
 
+						end
 					end
 				end
-			end
 
-			if s then
-				AimOn()
-			else
-				camera.CameraType = Enum.CameraType.Custom
-			end
+				if s then
+					AimOn()
+				else
+					camera.CameraType = Enum.CameraType.Custom
+				end
 			end)
 		end)
 		--[End]
