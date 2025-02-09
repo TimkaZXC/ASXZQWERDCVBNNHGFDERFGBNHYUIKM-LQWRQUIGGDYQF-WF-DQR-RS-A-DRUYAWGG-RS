@@ -334,7 +334,7 @@ function menu.Hub(name)
 		r_t.TextScaled = true
 
 		--[Setting Buttons]
-		SettingB('Esp (Check Team)', Sc_f, c_t.TextColor3, 2,function(s)
+			SettingB('Esp (Check Team)', Sc_f, c_t.TextColor3, 2,function(s)
 			pcall(function()
 				local Players = game:GetService("Players")
 				local Player = Players.LocalPlayer
@@ -344,15 +344,14 @@ function menu.Hub(name)
 					if key then
 						local NPlayer = key
 						local NChar = NPlayer.Character or NPlayer.CharacterAdded:Wait()
-
+						if not List:FindFirstChild(`{key.Name}_ESP`) then
 						for _, block in pairs(NChar:GetChildren()) do
 							if block then
 								if block:IsA("BasePart") then
-									if not List:FindFirstChild(`{key.Name}_ESP`) then
 										local keys = Instance.new('Folder', List)
 										keys.Name = `{key.Name}_ESP`
 										local newAdornment = Instance.new("BoxHandleAdornment")
-										newAdornment.Parent = List
+										newAdornment.Parent = keys
 										newAdornment.Adornee = block
 
 										newAdornment.Transparency = 0.75
@@ -378,7 +377,7 @@ function menu.Hub(name)
 										end)
 
 										NChar:FindFirstChild("Humanoid").Died:Connect(function()
-											newAdornment:Destroy()
+											keys:Destroy()
 										end)
 									end
 								end
@@ -398,6 +397,7 @@ function menu.Hub(name)
 				end
 			end)
 		end)
+
 
 		SettingB('Aim (All)', Sc_f, c_t.TextColor3, 2,function(s)
 			pcall(function()
